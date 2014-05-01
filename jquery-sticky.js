@@ -64,11 +64,3 @@
         });
     }
 })(jQuery);
-
-
-$('#stickybar').sticky();
-$('#anotherstickybar').sticky({ top: 0 });
-
-$('#anotherstickybar').on('click', function(e) {
-    $(this).sticky('remove');
-});
