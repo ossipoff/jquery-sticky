@@ -4,8 +4,10 @@
     var $window = $(window);
     var stickies = [];
     
+    var defaults = {};
+    
     var methods = {
-        add: function() {
+        add: function(options) {
             var sticky = {};
             sticky.$elem = $(this);
             sticky.position = sticky.$elem.position();
@@ -38,8 +40,19 @@
     
     $.fn.sticky = function() {
         var method, args;
-        
-        method = methods[arguments[0] || 'add'];
+        var method, args, options = {};
+
+        if (arguments.length > 0) {
+            method = methods[arguments[0]];
+
+            if (method) {
+                args = Array.prototype.slice.call(arguments, 1);
+            } else {
+                options = $.extend(options, defaults, arguments[0]);
+            }
+        } else {
+            method = methods['add'];
+        }
         
         this.each(function () {
             method.apply(this);
